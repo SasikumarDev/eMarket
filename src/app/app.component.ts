@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'eMarket';
+  AppFName="Nature";
+  AppLName="Vitamins";
+  AppBio="feel the freshness";
+  AppIconurl='assets/images/App_Icon.png';
 }
