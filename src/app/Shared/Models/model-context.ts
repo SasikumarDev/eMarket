@@ -2,6 +2,6 @@ export interface ModelContext {
 }
 
 export interface Login {
-    Username: string;
+    email: string;
     Password: string;
 }

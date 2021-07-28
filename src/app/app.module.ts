@@ -10,6 +10,7 @@ import { CardModule } from 'primeng/card';
 import { LoginComponent } from './login/login.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { InputTextModule } from 'primeng/inputtext';
     CardModule,
     ButtonModule,
     InputTextModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
