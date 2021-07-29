@@ -1,0 +1,19 @@
+.MenuHolder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background-color: #2874f0;
+    flex-wrap: wrap;
+    color: white;
+}
+.MenuAppNameHolder {
+    display: flex;
+    justify-content: space-evenly;
+}
+.MenuCompanynameHolder {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
