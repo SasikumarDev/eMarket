@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  companyName: 'Nature Vitamins',
+  companyMotto: 'feel the freshness',
+  companyIconPath: 'assets/images/App_Icon.png',
   supabaseURL: 'https://eakkupeleuvhfdtmfred.supabase.co',
   supabaseKEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyNjg0ODczMSwiZXhwIjoxOTQyNDI0NzMxfQ.dul43AHplOxy5xcB1IrQHHdqgRdAS82qLGE5zzA7R90'
 };
