@@ -17,3 +17,25 @@
     flex-wrap: wrap;
     align-items: center;
 }
+
+.btnLogin {
+    background-color: #fb641b !important;
+    border: 1px solid #fb641b !important;
+}
+
+.LoginHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+}

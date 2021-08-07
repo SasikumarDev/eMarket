@@ -2,6 +2,7 @@
  @import "node_modules/primeng/resources/themes/saga-blue/theme";
  @import "node_modules/primeng/resources/primeng";
  @import "node_modules/primeflex/primeflex";
+ @import 'primeflex/utils';
  /*
  Themes Available for free
 primeng/resources/themes/bootstrap4-light-blue/theme.css
@@ -38,186 +39,18 @@ primeng/resources/themes/luna-green/theme.css
 primeng/resources/themes/luna-pink/theme.css
 primeng/resources/themes/rhea/theme.css
  */	
-/*Custom Styles -Start*/
-.title{
-    text-align: left;
+ .Showxs {
+ display:none;
+ }
+@media (max-width:320px)  { 
+.Hidexs {
+ display: none !important;
 }
-.titleFname{
-    color: rgb(51, 121, 51);    
-    font-size: 60px;
-    font-family: monospace;
+.Showxs {
+display:block;
 }
-.titleLname{
-    color: rgb(170, 172, 62);
-    font-size: 40px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.titlebio{
-    padding-left: 55px;
-    white-space: pre-line;
-    color: rgb(170, 172, 62);
-    font-family: fantasy; 
-    font-size: 25px; 
-    font-style: italic; 
-    font-variant: normal; 
-    font-weight: 50; 
-    line-height: 7px;
-    letter-spacing: 8px;
-}
-.divHeader{
-    padding-bottom: 5px;
-    padding-left: 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -25px inset;
-}
-.divappicon{
-    width: 150px;
-}
-.appicon{
-    height: 150px;
-    width: 150px;
-}
-#mnuNavigator > a{
-    text-decoration: none;
-    padding:0px 5px;
-    font-family: monospace;
-    color: rgb(51, 121, 51);
-}
-.center{
-    margin-left: auto;
-    margin-right: auto;    
-}
-.right{
-    margin-left: auto;
-    margin-right: 0px;
-    right: 0px;
-}
-.left{
-    margin-right: auto;
-    margin-left: 0px;
-    left: 0px;
-}
-.textCenter{
-    text-align: center;
-}
-.textLeft{
-    text-align: left;
-}
-.textRight{
-    text-align: right;
-}
-.appnavigator{
-    padding-top: 10px;
-}
-/*Padding CSS*/
-.padding-xsm{
-    padding: 2px;
-}
-.paddingL-xsm{
-    padding-left: 2px;
-}
-.paddingR-xsm{
-    padding-right: 2px;
-}
-.paddingT-xsm{
-    padding-top: 2px;
-}
-.paddingB-xsm{
-    padding-bottom: 2px;
-}
-.paddingTB-xsm{
-    padding:2px 0px;
-}
-.paddingLR-xsm{
-    padding: 0px 2px;
-}
-.padding-xs{
-    padding: 5px;
-}
-.paddingL-xs{
-    padding-left: 5px;
-}
-.paddingR-xs{
-    padding-right: 5px;
-}
-.paddingT-xs{
-    padding-top: 5px;
-}
-.paddingB-xs{
-    padding-bottom: 5px;
-}
-.paddingTB-xs{
-    padding:5px 0px;
-}
-.paddingLR-xs{
-    padding: 0px 5px;
-}
-
-.padding-sm{
-    padding: 10px;
-}
-.paddingL-sm{
-    padding-left: 10px;
-}
-.paddingR-sm{
-    padding-right: 10px;
-}
-.paddingT-sm{
-    padding-top: 10px;
-}
-.paddingB-sm{
-    padding-bottom: 10px;
-}
-.paddingTB-sm{
-    padding:10px 0px;
-}
-.paddingLR-sm{
-    padding: 0px 10px;
-}
-.padding-md{
-    padding: 15px;
-}
-.paddingL-md{
-    padding-left: 15px;
-}
-.paddingR-md{
-    padding-right: 15px;
-}
-.paddingT-md{
-    padding-top: 15px;
-}
-.paddingB-md{
-    padding-bottom: 15px;
-}
-.paddingTB-md{
-    padding:15px 0px;
-}
-.paddingLR-md{
-    padding: 0px 15px;
-}
-.padding-lg{
-    padding: 20px;
-}
-.paddingL-lg{
-    padding-left: 20px;
-}
-.paddingR-lg{
-    padding-right: 20px;
-}
-.paddingT-lg{
-    padding-top: 20px;
-}
-.paddingB-lg{
-    padding-bottom: 20px;
-}
-.paddingTB-lg{
-    padding:20px 0px;
-}
-.paddingLR-lg{
-    padding: 0px 20px;
-}
-.no-margin
-{
-    margin: 0px;
-}
-/*Padding CSS*/
-/*Custom Style - End*/
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }

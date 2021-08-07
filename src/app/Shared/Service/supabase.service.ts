@@ -15,12 +15,15 @@ export class SupabaseService {
     this.supabase = createClient(environment.supabaseURL, environment.supabaseKEY);
   }
   signUpUser(Users: Login) {
-    return this.supabase.auth.signIn(Users);
+    return this.supabase.auth.signUp({ email: Users.email, password: Users.Password });
   }
   LoginUser(User: Login) {
-    return this.supabase.auth.signUp(User);
+    return this.supabase.auth.signIn({ email: User.email, password: User.Password });
   }
   getCurrentUser() {
     return this.supabase.auth.user();
+  }
+  LogOutUser() {
+   return this.supabase.auth.signOut();
   }
 }
