@@ -6,6 +6,9 @@
     background-color: #2874f0;
     flex-wrap: wrap;
     color: white;
+    position:fixed;
+    top:0;
+    width:100%;
 }
 .MenuAppNameHolder {
     display: flex;
@@ -38,4 +41,11 @@
     gap: 1rem;
     flex-wrap: wrap;
     width: 100%;
+}
+
+.btnNoback {
+    border: none;
+    background: transparent;
+    color: white;
+    outline:none;
 }

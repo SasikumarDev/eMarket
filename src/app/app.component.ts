@@ -3,7 +3,7 @@ import { Login } from './Shared/Models/model-context';
 import { Component, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '@supabase/supabase-js';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -23,34 +23,32 @@ export class AppComponent {
   EventUserLogged: EventEmitter<boolean> = new EventEmitter();
   UserMenuitems: MenuItem[];
   DisplaySideNav: boolean = false;
+  ErrorMessage = '';
 
   constructor(private Service: SupabaseService) {
     this.CheckUserLoggedin();
-     this.UserMenuitems = [{
-            items: [{
-                label: 'Profile',
-                icon: 'pi pi-user',
-                command: () => {
-                    this.update();
-                }
-            },
-            {
-                label: 'Sign Out',
-                icon: 'pi pi-sign-out',
-                command: () => {
-                    this.LogOutUser();
-                }
-            }
-            ]}
-        ];
+    this.UserMenuitems = [{
+      items: [{
+        label: 'Profile',
+        icon: 'pi pi-user',
+        command: () => {
+          this.update();
+        }
+      },
+      {
+        label: 'Sign Out',
+        icon: 'pi pi-sign-out',
+        command: () => {
+          this.LogOutUser();
+        }
+      }
+      ]
+    }
+    ];
   }
-  
+
   update(): void {
-   console.log('Test Update');
-  }
-  
-  delete(): void {
-   console.log('Test Delete');
+    console.log('Test Update');
   }
 
   LoginDialog() {
@@ -65,15 +63,22 @@ export class AppComponent {
     try {
       if (this.IsLogin) {
         let LoginResult = await this.Service.LoginUser(this.LoginUser);
-        console.log(LoginResult);
-        this.setToken(LoginResult);
-        this.displayLogin = false;
-        this.CheckUserLoggedin();
+        if (!LoginResult.error) {
+          this.setToken(LoginResult);
+          this.displayLogin = false;
+          this.CheckUserLoggedin();
+        } else {
+          this.ErrorMessage = LoginResult.error.message;
+        }
       } else {
         let CreateUserResult = await this.Service.signUpUser(this.LoginUser);
-        console.log(CreateUserResult);
-        this.setToken(CreateUserResult);
-        this.CheckUserLoggedin();
+        if (!CreateUserResult.error) {
+          this.setToken(CreateUserResult);
+          this.displayLogin = false;
+          this.CheckUserLoggedin();
+        } else {
+          this.ErrorMessage = CreateUserResult.error.message;
+        }
       }
     } catch (ex) {
       console.log(ex);
@@ -95,8 +100,8 @@ export class AppComponent {
         this.isUserAuth = true;
         this.EventUserLogged.emit(this.isUserAuth);
       } else {
-      this.isUserAuth = false;
-      this.EventUserLogged.emit(this.isUserAuth);
+        this.isUserAuth = false;
+        this.EventUserLogged.emit(this.isUserAuth);
       }
     }
     catch (ex) {
@@ -105,14 +110,13 @@ export class AppComponent {
       console.log(ex);
     }
   }
-  
+
   LogOutUser() {
-   try {
-   let rslt = this.Service.LogOutUser();
-   console.log(rslt);
-   this.CheckUserLoggedin();
-   } catch(ex){
-   console.log(ex);
-   }
+    try {
+      let rslt = this.Service.LogOutUser();
+      this.CheckUserLoggedin();
+    } catch (ex) {
+      console.log(ex);
+    }
   }
 }

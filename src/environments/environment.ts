@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  companyName: 'Nature Vitamins',
+  companyName: 'Nature Vitamins ',
   companyMotto: 'feel the freshness',
   companyIconPath: 'assets/images/App_Icon.png',
   supabaseURL: 'https://fvlmwzgvmutngnoloqrz.supabase.co',

@@ -1,12 +1,12 @@
 <div class="MenuHolder">
   <div class="MenuAppNameHolder">
-    <div style="align-self:center" class="Showxs">
-      <button type="button" class="btn btn-light" (click)="DisplaySideNav = true"><i class="pi pi-bars" style="font-size: 1rem"></i></button>
+    <div style="align-self:center" class="Showxs Showsm">
+      <button type="button" class="btn btnNoback" (click)="DisplaySideNav = true"><i class="pi pi-bars" style="font-size: 1rem"></i></button>
     </div>
     <div>
       <img src="{{appIcon}}" alt="App icon" style="height: 40px;width: 40px;" />
     </div>
-    <div class="MenuCompanynameHolder Hidexs">
+    <div class="MenuCompanynameHolder Hidexs Hidesm">
       <div style="font-size: 18px;font-weight:bold">
         {{appName}}
       </div>
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <div style="align-self:center" class="Hidexs">
+  <div style="align-self:center" class="Hidexs Hidesm">
     <div class="">
       <div class="p-inputgroup">
         <input type="text" pInputText placeholder="Keyword">
@@ -23,9 +23,12 @@
       </div>
     </div>
   </div>
+  <div style="align-self:center" class="Showsm Showxs">
+     <button type="button" class="btn btnNoback" (click)="DisplaySideNav = true"><i class="pi pi-search" style="font-size: 1rem"></i></button>
+  </div>
   <div style="display:flex;align-self:center;gap:0.2rem">
     <div>
-      <button class="btn btn-light"><i class="pi pi-shopping-cart" pBadge ></i></button>
+      <button class="btn btnNoback"><i class="pi pi-shopping-cart" pBadge severity="warning"></i></button>
     </div>
     <div style="align-self:center" *ngIf="!isUserAuth">
       <button class="btn btn-primary btnLogin" (click)="LoginDialog()">Login</button>
@@ -63,6 +66,9 @@
         <div style="align-self: flex-end;" *ngIf="IsLogin">
           Forgot Password ?
         </div>
+      </div>
+      <div *ngIf="ErrorMessage" style="align-self: center;">
+        <p class="ng-invalid ">{{ErrorMessage}}</p>
       </div>
       <div style="align-self: center;width: 100%;">
         <button class="btn btn-primary btnLogin" (click)="LoginAccount()" style="width:100%">{{PopupTitle}}</button>
