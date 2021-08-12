@@ -1,7 +1,8 @@
 <div class="MenuHolder">
   <div class="MenuAppNameHolder">
     <div style="align-self:center" class="Showxs Showsm">
-      <button type="button" class="btn btnNoback" (click)="DisplaySideNav = true"><i class="pi pi-bars" style="font-size: 1rem"></i></button>
+      <button type="button" class="btn btnNoback" (click)="DisplaySideNav = true"><i class="pi pi-bars"
+          style="font-size: 1rem"></i></button>
     </div>
     <div>
       <img src="{{appIcon}}" alt="App icon" style="height: 40px;width: 40px;" />
@@ -23,26 +24,33 @@
       </div>
     </div>
   </div>
-  <div style="align-self:center" class="Showsm Showxs">
-     <button type="button" class="btn btnNoback" (click)="DisplaySideNav = true"><i class="pi pi-search" style="font-size: 1rem"></i></button>
-  </div>
   <div style="display:flex;align-self:center;gap:0.2rem">
     <div>
-      <button class="btn btnNoback"><i class="pi pi-shopping-cart" pBadge severity="warning"></i></button>
+      <button class="btn btnNoback" (click)="RouteCart();"><i class="pi pi-shopping-cart" pBadge severity="warning"></i></button>
     </div>
     <div style="align-self:center" *ngIf="!isUserAuth">
       <button class="btn btn-primary btnLogin" (click)="LoginDialog()">Login</button>
     </div>
-    <div style="align-self:center" *ngIf="isUserAuth" class="Hidexs">
-     <p-avatar icon="pi pi-user" styleClass="p-mr-2"  shape="circle" (click)="menu.toggle($event)"></p-avatar>
-     <p-menu #menu [popup]="true" [model]="UserMenuitems"></p-menu>
+    <div style="align-self:center" *ngIf="isUserAuth">
+      <p-avatar icon="pi pi-user" styleClass="p-mr-2" shape="circle" (click)="menu.toggle($event)"></p-avatar>
+      <p-menu #menu [popup]="true" [model]="UserMenuitems"></p-menu>
+    </div>
+  </div>
+    <div style="align-self:center;width:100%" class="Showsm Showxs">
+       <div class="">
+      <div class="p-inputgroup">
+        <input type="text" pInputText placeholder="Keyword">
+        <button type="button" pButton label="Search"></button>
+      </div>
     </div>
   </div>
 </div>
-
+<div class="LoaderContainer" *ngIf="Service.isLoading | async">
+  <p-progressSpinner [style]="{top: '50%', left: '50%'}" ></p-progressSpinner>
+</div>
 
 <p-sidebar [(visible)]="DisplaySideNav" [baseZIndex]="10000">
-    <h3>Left Sidebar</h3>
+  <h3>Left Sidebar</h3>
 </p-sidebar>
 <p-dialog [header]="PopupTitle" [(visible)]="displayLogin" [modal]="true"
   [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">

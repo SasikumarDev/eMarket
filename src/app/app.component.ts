@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SupabaseService } from './Shared/Service/supabase.service';
 import { Login } from './Shared/Models/model-context';
 import { Component, EventEmitter } from '@angular/core';
@@ -25,7 +26,7 @@ export class AppComponent {
   DisplaySideNav: boolean = false;
   ErrorMessage = '';
 
-  constructor(private Service: SupabaseService) {
+  constructor(public Service: SupabaseService, private Route: Router) {
     this.CheckUserLoggedin();
     this.UserMenuitems = [{
       items: [{
@@ -60,9 +61,11 @@ export class AppComponent {
     this.LoginUser = <Login>{};
   }
   async LoginAccount() {
+    this.Service.Show();
     try {
       if (this.IsLogin) {
         let LoginResult = await this.Service.LoginUser(this.LoginUser);
+        console.log(LoginResult);
         if (!LoginResult.error) {
           this.setToken(LoginResult);
           this.displayLogin = false;
@@ -76,13 +79,26 @@ export class AppComponent {
           this.setToken(CreateUserResult);
           this.displayLogin = false;
           this.CheckUserLoggedin();
+          this.CreateUserProfile(CreateUserResult?.user?.id)
         } else {
           this.ErrorMessage = CreateUserResult.error.message;
         }
       }
     } catch (ex) {
       console.log(ex);
+      this.Service.Hide();
     }
+    this.Service.Hide();
+  }
+  async CreateUserProfile(userID: any) {
+    this.Service.Show();
+    try {
+      let rslt = await this.Service.SavetoTable('UserDetails', { uuid: userID, URole: 'C' });
+      console.log(rslt);
+    } catch (ex) {
+      console.log(ex);
+    }
+    this.Service.Hide();
   }
   setToken(response: any) {
     if (response.data.confirmation_sent_at && !response.data.access_token) {
@@ -92,6 +108,7 @@ export class AppComponent {
     }
   }
   CheckUserLoggedin() {
+    this.Service.Show();
     try {
       let loguser = this.Service.getCurrentUser();
       console.log(loguser);
@@ -109,6 +126,7 @@ export class AppComponent {
       this.EventUserLogged.emit(this.isUserAuth);
       console.log(ex);
     }
+    this.Service.Hide();
   }
 
   LogOutUser() {
@@ -118,5 +136,8 @@ export class AppComponent {
     } catch (ex) {
       console.log(ex);
     }
+  }
+  RouteCart() {
+    this.Route.navigateByUrl("/Cart");
   }
 }

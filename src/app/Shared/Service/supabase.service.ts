@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { AuthChangeEvent, createClient, Session, SupabaseClient } from '@supabase/supabase-js';
 import { HttpClient } from '@angular/common/http';
 import { Login } from '../Models/model-context';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Login } from '../Models/model-context';
 export class SupabaseService {
 
   private supabase: SupabaseClient;
+  public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private Http: HttpClient) {
     this.supabase = createClient(environment.supabaseURL, environment.supabaseKEY);
@@ -24,6 +26,15 @@ export class SupabaseService {
     return this.supabase.auth.user();
   }
   LogOutUser() {
-   return this.supabase.auth.signOut();
+    return this.supabase.auth.signOut();
+  }
+  SavetoTable(Tablename: string, Values: any) {
+    return this.supabase.from(Tablename).insert(Values);
+  }
+  Show() {
+    this.isLoading.next(true);
+  }
+  Hide() {
+    this.isLoading.next(false);
   }
 }

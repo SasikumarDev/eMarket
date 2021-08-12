@@ -6,9 +6,11 @@
     background-color: #2874f0;
     flex-wrap: wrap;
     color: white;
-    position:fixed;
+    position:sticky;
     top:0;
     width:100%;
+    gap:1rem;
+    margin-bottom: 1rem;
 }
 .MenuAppNameHolder {
     display: flex;
@@ -48,4 +50,13 @@
     background: transparent;
     color: white;
     outline:none;
+}
+
+.LoaderContainer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.8;
+    z-index: 99;
 }
