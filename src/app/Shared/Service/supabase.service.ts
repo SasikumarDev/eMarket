@@ -37,4 +37,8 @@ export class SupabaseService {
   Hide() {
     this.isLoading.next(false);
   }
+  MatchQuery(Tablename: string,Condition: any,SelectColumns?: string | undefined) {
+    SelectColumns = !SelectColumns ? undefined : SelectColumns;
+    return this.supabase.from(Tablename).select(SelectColumns).match(Condition)
+  }
 }

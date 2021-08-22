@@ -2,6 +2,21 @@
   <div class="cardnodata">
     <div class="CartHeader" style="background-color: rgb(255, 255, 255);">
       <div class="_3g_HeN">My Cart</div>
+      <div *ngIf="CartItems.length === 0" class="CartEmpty">
+      <div>
+      <img src="/assets/images/emcart.png" style="width:100%" alt="no items in cart" />
+      </div>
+      <div style="text-align: center;align-self:center" *ngIf="!appComponent.isUserAuth">
+      <p style="font-size:0.9rem">Missing Cart items?</p>
+      <p style="font-size:0.7rem">Login to see the items you added previously</p>
+      </div>
+      <div style="text-align: center;align-self:center" *ngIf="appComponent.isUserAuth">
+      <p style="font-size:0.9rem">No Cart items</p>
+      </div>
+      <div *ngIf="!appComponent.isUserAuth">
+       <button class="btn btn-primary btnLogin" (click)="appComponent.LoginDialog()">Login</button>
+      </div>
+      </div>
     </div>
   </div>
 </div>

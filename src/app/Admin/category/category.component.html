@@ -1,0 +1,25 @@
+<div class="Categorydiv">
+  <div class="flexrow">
+    <form #Categoryfrm="ngForm">
+      <div style="align-self: center;">
+        <input type="text" name="CategoryID" pInputText [(ngModel)]="Category.CID" #cid="ngModel"
+          placeholder="Category ID" style="width:100%" autocomplete="off">
+      </div>
+      <div style="align-self: center;">
+        <input type="text" name="CategoryDesc" pInputText [(ngModel)]="Category.CDesc" #Cdesc="ngModel"
+          placeholder="Category" style="width:100%" autocomplete="off" required maxlength="30">
+      </div>
+      <div>
+        <p>Status</p>
+        <p-checkbox [(ngModel)]="Category.CStatus" name="Status" [binary]="true" inputId="binary" #cStatus="ngModel">
+        </p-checkbox>
+        <!-- <label for="binary">{{cStatus.}}</label> -->
+      </div>
+      <div style="align-self: center;">
+        <button type="button">Back</button>
+        <button type="button" (click)="Categoryfrm.form.valid && SaveCategory()">Save</button>
+        <button type="button" [disabled]="FormMode === 'A'">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>

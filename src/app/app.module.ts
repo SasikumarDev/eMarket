@@ -20,11 +20,20 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CartComponent } from './cart/cart.component';
+import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { ProductListingComponent } from './Admin/Masters/Product/product-listing/product-listing.component';
+import { ProductComponent } from './Admin/Masters/Product/product/product.component';
+import { CategoryComponent } from './Admin/category/category.component';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CartComponent
+    CartComponent,
+    DashboardComponent,
+    ProductListingComponent,
+    ProductComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +51,7 @@ import { CartComponent } from './cart/cart.component';
     SidebarModule,
     ConfirmDialogModule,
     ProgressSpinnerModule,
+    CheckboxModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'

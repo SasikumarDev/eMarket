@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-
-  constructor(private appComponent: AppComponent) { }
+  CartItems: any[] = [];
+  constructor(public appComponent: AppComponent) { }
 
   ngOnInit(): void {
   }

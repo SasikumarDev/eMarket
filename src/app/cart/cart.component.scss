@@ -7,10 +7,10 @@
 }
 .cardnodata {
     flex-direction: column;
-    width: 90%;
+    width: 98%;
     align-self: center;
     background-color: white;
-    border-radius: 0.5rem;
+    /*border-radius: 0.5rem;*/
     min-height: 20rem;
     border: 1px solid white;
     box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
@@ -18,7 +18,15 @@
 }
 .CartHeader {
     justify-content: flex-start;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.2rem;
+    font-weight: 500;
     align-items: center;
+}
+.CartEmpty {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 1rem;
+margin-top: 1rem;
 }

@@ -5,6 +5,7 @@ import { Component, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '@supabase/supabase-js';
 import { MenuItem } from 'primeng/api';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +26,12 @@ export class AppComponent {
   UserMenuitems: MenuItem[];
   DisplaySideNav: boolean = false;
   ErrorMessage = '';
+  UserRole: string = '';
 
-  constructor(public Service: SupabaseService, private Route: Router) {
+  constructor(public Service: SupabaseService, private Route: Router, private swupdate: SwUpdate) {
+    this.swupdate.available.subscribe(event => {
+      this.swupdate.activateUpdate().then(() => document.location.reload());
+    });
     this.CheckUserLoggedin();
     this.UserMenuitems = [{
       items: [{
@@ -65,7 +70,6 @@ export class AppComponent {
     try {
       if (this.IsLogin) {
         let LoginResult = await this.Service.LoginUser(this.LoginUser);
-        console.log(LoginResult);
         if (!LoginResult.error) {
           this.setToken(LoginResult);
           this.displayLogin = false;
@@ -94,7 +98,6 @@ export class AppComponent {
     this.Service.Show();
     try {
       let rslt = await this.Service.SavetoTable('UserDetails', { uuid: userID, URole: 'C' });
-      console.log(rslt);
     } catch (ex) {
       console.log(ex);
     }
@@ -104,18 +107,22 @@ export class AppComponent {
     if (response.data.confirmation_sent_at && !response.data.access_token) {
       alert('Confirmation Email Sent')
     } else {
-      console.log(response.user.email);
+      // console.log(response.user.email);
     }
   }
   CheckUserLoggedin() {
     this.Service.Show();
     try {
       let loguser = this.Service.getCurrentUser();
-      console.log(loguser);
       if (loguser) {
         this.LoggedUser = loguser;
         this.isUserAuth = true;
         this.EventUserLogged.emit(this.isUserAuth);
+        this.GetUserRole().then((x) => {
+          if (!x.error) {
+            this.UserRole = x.data[0].URole;
+          }
+        });
       } else {
         this.isUserAuth = false;
         this.EventUserLogged.emit(this.isUserAuth);
@@ -128,7 +135,9 @@ export class AppComponent {
     }
     this.Service.Hide();
   }
-
+  async GetUserRole() {
+    return await this.Service.MatchQuery('UserDetails', { uuid: this.LoggedUser.id }, 'URole');
+  }
   LogOutUser() {
     try {
       let rslt = this.Service.LogOutUser();
