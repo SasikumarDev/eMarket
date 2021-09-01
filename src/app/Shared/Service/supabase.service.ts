@@ -37,8 +37,27 @@ export class SupabaseService {
   Hide() {
     this.isLoading.next(false);
   }
-  MatchQuery(Tablename: string,Condition: any,SelectColumns?: string | undefined) {
+  MatchQuery(Tablename: string, Condition: any, SelectColumns?: string | undefined) {
     SelectColumns = !SelectColumns ? undefined : SelectColumns;
     return this.supabase.from(Tablename).select(SelectColumns).match(Condition)
+  }
+  InsertData(tableName: string, Parmeters: any) {
+    return this.supabase.from(tableName).insert([Parmeters]);
+  }
+  CheckExistence(TableName: string, columnNames: string, Condition: any) {
+    return this.supabase.from(TableName).select(columnNames, { count: 'exact', head: true }).match(Condition);
+  }
+  UploadProductImage(Filename: string, ProductImage: File) {
+    return this.supabase.storage.from('products').upload(`public/${Filename}`, ProductImage);
+  }
+  GetImageURL(Filename: string) {
+    return this.supabase.storage.from('products').getPublicUrl(`public/${Filename}`);
+  }
+  UpdateTable(Tablename: string, UpdateColumn: any, MatchCondtion: any) {
+    return this.supabase.from(Tablename).update(UpdateColumn).match(MatchCondtion)
+  }
+  SelectData(TableName: string, SelectColumns?: string) {
+    SelectColumns = !SelectColumns ? undefined : SelectColumns;
+    return this.supabase.from(TableName).select(SelectColumns);
   }
 }

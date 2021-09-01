@@ -1,0 +1,7 @@
+<div class="UploadContainer">
+  <div class="UploadPreview" (click)="UploadContainerClick()">
+    <img [src]="imageSrc" style="width: 100%;height: 100%;" alt="Preview Image" />
+  </div>
+  <small *ngIf="ErroMessage" style="font-size: .675em;color: red;">{{ErroMessage}}</small>
+  <input type="file" id="fileupldcmp" style="display: none;" #fileupld (change)="HandleChange($event)" />
+</div>

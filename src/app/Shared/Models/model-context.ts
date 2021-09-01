@@ -12,3 +12,15 @@ export interface Category {
     CImgpath: string;
     CStatus: string;
 }
+
+export interface ListingRouteParams {
+    Menu: string;
+    Redirect: string;
+    FormMode: string;
+    Keys: string;
+}
+
+export interface ListingColDef {
+    field: string;
+    header: string;
+}

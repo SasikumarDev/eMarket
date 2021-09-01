@@ -6,11 +6,13 @@ import { environment } from 'src/environments/environment';
 import { User } from '@supabase/supabase-js';
 import { MenuItem } from 'primeng/api';
 import { SwUpdate } from '@angular/service-worker';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [MessageService]
 })
 export class AppComponent {
   appName = environment.companyName;
@@ -28,7 +30,7 @@ export class AppComponent {
   ErrorMessage = '';
   UserRole: string = '';
 
-  constructor(public Service: SupabaseService, private Route: Router, private swupdate: SwUpdate) {
+  constructor(public Service: SupabaseService, private Route: Router, private swupdate: SwUpdate,public ToastMsg: MessageService) {
     this.swupdate.available.subscribe(event => {
       this.swupdate.activateUpdate().then(() => document.location.reload());
     });
@@ -74,6 +76,7 @@ export class AppComponent {
           this.setToken(LoginResult);
           this.displayLogin = false;
           this.CheckUserLoggedin();
+          this.Route.navigateByUrl("/");
         } else {
           this.ErrorMessage = LoginResult.error.message;
         }
@@ -126,11 +129,13 @@ export class AppComponent {
       } else {
         this.isUserAuth = false;
         this.EventUserLogged.emit(this.isUserAuth);
+        this.UserRole = '';
       }
     }
     catch (ex) {
       this.isUserAuth = false;
       this.EventUserLogged.emit(this.isUserAuth);
+      this.UserRole = '';
       console.log(ex);
     }
     this.Service.Hide();
@@ -142,6 +147,7 @@ export class AppComponent {
     try {
       let rslt = this.Service.LogOutUser();
       this.CheckUserLoggedin();
+      this.Route.navigateByUrl("/");
     } catch (ex) {
       console.log(ex);
     }

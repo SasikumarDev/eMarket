@@ -25,6 +25,12 @@ import { ProductListingComponent } from './Admin/Masters/Product/product-listing
 import { ProductComponent } from './Admin/Masters/Product/product/product.component';
 import { CategoryComponent } from './Admin/category/category.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ToastModule } from 'primeng/toast';
+import { TrimDirective } from './Shared/Validators/trim.directive';
+import { CheckExistenceDirective } from './Shared/Validators/check-existence.directive';
+import { ListingComponent } from './Shared/Components/listing/listing.component';
+import { FileuploadComponent } from './Shared/Components/fileupload/fileupload.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,11 @@ import { CheckboxModule } from 'primeng/checkbox';
     DashboardComponent,
     ProductListingComponent,
     ProductComponent,
-    CategoryComponent
+    CategoryComponent,
+    TrimDirective,
+    CheckExistenceDirective,
+    ListingComponent,
+    FileuploadComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +62,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     ConfirmDialogModule,
     ProgressSpinnerModule,
     CheckboxModule,
+    ToastModule,
+    TableModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'

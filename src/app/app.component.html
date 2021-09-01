@@ -19,11 +19,11 @@
   <div style="align-self: center;" class="Hidexs Hidesm" *ngIf="UserRole.includes('A')">
     <div style="display: flex;flex-direction: row;align-items: center;gap:0.2rem">
       <a class="btn btnNoback" routerLink="/Dashboard">Dashboard</a>
-      <a class="btn btnNoback" routerLink="/Category">Category</a>
+      <a class="btn btnNoback" routerLink="/Listing" [queryParams]="{Menu:'Category',Redirect:'/Category'}">Category</a>
       <button type="button" class="btn btnNoback">Orders</button>
     </div>
   </div>
-  <div style="align-self:center" class="Hidexs Hidesm" *ngIf="UserRole.includes('C')">
+  <div style="align-self:center" class="Hidexs Hidesm" *ngIf="!UserRole.includes('A')">
     <div class="">
       <div class="p-inputgroup">
         <input type="text" pInputText placeholder="Keyword">
@@ -32,7 +32,7 @@
     </div>
   </div>
   <div style="display:flex;align-self:center;gap:0.2rem">
-    <div *ngIf="UserRole.includes('C')">
+    <div *ngIf="!UserRole.includes('A')">
       <button class="btn btnNoback" (click)="RouteCart();"><i class="pi pi-shopping-cart" pBadge
           severity="warning"></i></button>
     </div>
@@ -40,11 +40,12 @@
       <button class="btn btn-primary btnLogin" (click)="LoginDialog()">Login</button>
     </div>
     <div style="align-self:center" *ngIf="isUserAuth">
-      <p-avatar icon="pi pi-user" styleClass="p-mr-2" shape="circle" (click)="menu.toggle($event)"></p-avatar>
+      <p-avatar image="https://avatars.dicebear.com/api/initials/:{{LoggedUser.email}}.svg" styleClass="p-mr-2"
+        shape="circle" (click)="menu.toggle($event)"></p-avatar>
       <p-menu #menu [popup]="true" [model]="UserMenuitems"></p-menu>
     </div>
   </div>
-  <div style="align-self:center;width:100%" *ngIf="UserRole.includes('C')" class="Showsm Showxs">
+  <div style="align-self:center;width:100%" *ngIf="!UserRole.includes('A')" class="Showsm Showxs">
     <div class="">
       <div class="p-inputgroup">
         <input type="text" pInputText placeholder="Keyword">
@@ -56,6 +57,7 @@
 <div class="LoaderContainer" *ngIf="Service.isLoading | async">
   <p-progressSpinner [style]="{top: '50%', left: '50%'}"></p-progressSpinner>
 </div>
+<p-toast></p-toast>
 
 <p-sidebar [(visible)]="DisplaySideNav" [baseZIndex]="10000">
   <h3>Left Sidebar</h3>

@@ -5,12 +5,14 @@ import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { RoleGuard } from './Shared/Auth/role.guard';
 import { ProductComponent } from './Admin/Masters/Product/product/product.component';
 import { CategoryComponent } from './Admin/category/category.component';
+import { ListingComponent } from './Shared/Components/listing/listing.component';
 
 const routes: Routes = [
   { path: 'Cart', component: CartComponent },
   { path: 'Dashboard', component: DashboardComponent, canActivate: [RoleGuard], data: { role: 'A' } },
   { path: 'Product', component: ProductComponent, canActivate: [RoleGuard], data: { role: 'A' } },
   { path: 'Category', component: CategoryComponent, canActivate: [RoleGuard], data: { role: 'A' } },
+  { path: 'Listing', component: ListingComponent, canActivate: [RoleGuard], data: { role: 'A' } },
   { path: '**', redirectTo: '/' }
 ];
 

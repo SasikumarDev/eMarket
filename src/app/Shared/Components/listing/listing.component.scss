@@ -1,0 +1,25 @@
+.ActionControl {
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+align-items:center;
+justify-content:flex-start;
+gap:1rem;
+padding:0.5rem;
+background-color:white;
+box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
+}
+
+.TableListing {
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+align-items:center;
+justify-content:flex-start;
+gap:1rem;
+padding:0.5rem;
+background-color:white;
+box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
+width:100%;
+margin-top:0.5rem
+}
