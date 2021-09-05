@@ -59,8 +59,31 @@
 </div>
 <p-toast></p-toast>
 
-<p-sidebar [(visible)]="DisplaySideNav" [baseZIndex]="10000">
-  <h3>Left Sidebar</h3>
+<p-sidebar [(visible)]="DisplaySideNav" [baseZIndex]="10000" [showCloseIcon]="false">
+<div class="SidenaveHeaderH">
+ <div>
+      <img src="{{appIcon}}" alt="App icon" style="height: 40px;width: 40px;" />
+    </div>
+    <div class="MenuCompanynameHolder">
+      <div style="font-size: 18px;font-weight:bold">
+        {{appName}}
+      </div>
+      <div style="font-size: 12px;">
+        {{appMotto}}
+      </div>
+    </div>
+</div>
+<div class="SidenavMenuHolder">
+<div style="width:100%">
+ <a class="btn btnsidenav" routerLink="/Dashboard" (click)="DisplaySideNav = false;">Dashboard</a>
+</div>
+<div style="width:100%">
+  <a class="btn btnsidenav" routerLink="/Listing" [queryParams]="{Menu:'Category',Redirect:'/Category'}" (click)="DisplaySideNav = false;">Category</a>
+</div>
+<div style="width:100%">
+  <button type="button" class="btn btnsidenav" (click)="DisplaySideNav = false;">Orders</button>
+</div>
+</div>
 </p-sidebar>
 <p-dialog [header]="PopupTitle" [(visible)]="displayLogin" [modal]="true"
   [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">

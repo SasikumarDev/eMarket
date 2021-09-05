@@ -10,7 +10,7 @@
           <input type="text" name="CategoryDesc" pInputText [(ngModel)]="Category.CDesc" #Cdesc="ngModel"
             [ngClass]="{'ng-invalid ng-dirty': Cdesc.invalid && (Cdesc.dirty || Cdesc.touched) || (Categoryfrm.invalid && Categoryfrm.submitted)}"
             style="width:100%" autocomplete="off" required maxlength="30" appTrim [TrimEmptySpace]="true"
-            [ReplaceSpecialChar]="true" appCheckExistence>
+            [ReplaceSpecialChar]="true" appCheckExistence [FormMode]="QueryParms.FormMode" [NqField] = "existsValidatorParams">
           <small *ngIf="Cdesc.hasError('appCheckExistence')" style="font-size:.775em;color:red">Category Already
             Exists</small>
           <label for="CategoryID">Category</label>
@@ -22,9 +22,9 @@
         </p-checkbox>
       </div>
       <div class="btnHolder">
-        <button type="button" class="btn btn-warning">Back</button>
+        <button type="button" class="btn btn-warning" (click)="HandleBack()">Back</button>
         <button type="submit" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-warning" [disabled]="FormMode === 'A'">Delete</button>
+        <button type="button" class="btn btn-warning" [disabled]="QueryParms.FormMode === 'A'">Delete</button>
       </div>
     </form>
   </div>

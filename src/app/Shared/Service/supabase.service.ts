@@ -60,4 +60,11 @@ export class SupabaseService {
     SelectColumns = !SelectColumns ? undefined : SelectColumns;
     return this.supabase.from(TableName).select(SelectColumns);
   }
+  SelectDataEdit(tableName: string, ColumnName: string, ColumnValue: string, SelectColumns?: string) {
+    SelectColumns = !SelectColumns ? undefined : SelectColumns;
+    return this.supabase.from(tableName).select(SelectColumns).eq(ColumnName, ColumnValue);
+  }
+  CheckExistenceEdit(tablename: string, columnNames: string, nqColumn: string, nqValue: string, MatchCondition: any) {
+    return this.supabase.from(tablename).select(columnNames, { count: 'exact', head: true }).neq(nqColumn, nqValue).match(MatchCondition);
+  }
 }
