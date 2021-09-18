@@ -23,4 +23,5 @@ export interface ListingRouteParams {
 export interface ListingColDef {
     field: string;
     header: string;
+    dataType: string;
 }

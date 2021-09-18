@@ -33,17 +33,17 @@ export class ListingComponent implements OnInit {
     this.DataSource = ds.data;
     if (this.QueryParms.Menu === 'Category') {
       this.QueryParms = { Keys: '', FormMode: 'A', Redirect: this.Route.url, Menu: this.QueryParms.Menu };
-      this.cols = [{ field: 'CID', header: 'ID' }, { field: 'CDesc', header: 'Description' }]
+      this.cols = [{ field: 'CID', header: 'ID', dataType: 'text' }, { field: 'CDesc', header: 'Description', dataType: 'text' }, { field: 'CStatus', header: 'Status', dataType: 'boolean' }];
       this.Loading = false;
     }
   }
-  
+
   handleAdd() {
-  if (this.QueryParms.Menu === 'Category') {
+    if (this.QueryParms.Menu === 'Category') {
       this.Route.navigate(['/Category'], { queryParams: { Keys: '', FormMode: 'A', Redirect: this.Route.url, Menu: this.QueryParms.Menu } });
     }
   }
-  
+
   handleRefresh() {
     this.Loading = true;
     this.FillDataSource();

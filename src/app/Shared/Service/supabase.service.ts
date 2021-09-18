@@ -67,4 +67,7 @@ export class SupabaseService {
   CheckExistenceEdit(tablename: string, columnNames: string, nqColumn: string, nqValue: string, MatchCondition: any) {
     return this.supabase.from(tablename).select(columnNames, { count: 'exact', head: true }).neq(nqColumn, nqValue).match(MatchCondition);
   }
+  DeleteData(tableName: string,MatchCondition: any) {
+    return this.supabase.from(tableName).delete().match(MatchCondition);
+  }
 }

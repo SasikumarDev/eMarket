@@ -6,13 +6,13 @@ import { environment } from 'src/environments/environment';
 import { User } from '@supabase/supabase-js';
 import { MenuItem } from 'primeng/api';
 import { SwUpdate } from '@angular/service-worker';
-import {MessageService} from 'primeng/api';
+import {MessageService,ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService,ConfirmationService]
 })
 export class AppComponent {
   appName = environment.companyName;
@@ -30,7 +30,7 @@ export class AppComponent {
   ErrorMessage = '';
   UserRole: string = '';
 
-  constructor(public Service: SupabaseService, private Route: Router, private swupdate: SwUpdate,public ToastMsg: MessageService) {
+  constructor(public Service: SupabaseService, private Route: Router, private swupdate: SwUpdate,public ToastMsg: MessageService, public ConfirmPopup: ConfirmationService) {
     this.swupdate.available.subscribe(event => {
       this.swupdate.activateUpdate().then(() => document.location.reload());
     });

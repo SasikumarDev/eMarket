@@ -1,9 +1,10 @@
 <div class="Categorydiv">
   <div class="flexrow">
-    <form #Categoryfrm="ngForm" (ngSubmit)="Categoryfrm.form.valid && SaveCategory()" class="flexcol formWidth">
+    <form #Categoryfrm="ngForm" (ngSubmit)="Categoryfrm.form.valid && (!ProductImage || !ImageUrl) && HandleSubmitClck()" class="flexcol formWidth">
       <div style="align-self: center;width:90%">
-        <app-fileupload [AllowedTypes]="AllowedFileTypes" [imageSrc]="Category.CImgpath"
+        <app-fileupload [AllowedTypes]="AllowedFileTypes" [imageSrc]="ImageUrl"
           (OnChangeEvent)="OnFileChange($event)" name="fileupld"></app-fileupload>
+          <small *ngIf="(!ProductImage || !ImageUrl) && Categoryfrm.submitted" style="font-size:.775em;color:red">Category Image is Required</small>
       </div>
       <div style="align-self: center;width:90%">
         <span class="p-float-label">
@@ -24,7 +25,7 @@
       <div class="btnHolder">
         <button type="button" class="btn btn-warning" (click)="HandleBack()">Back</button>
         <button type="submit" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-warning" [disabled]="QueryParms.FormMode === 'A'">Delete</button>
+        <button type="button" class="btn btn-warning" [disabled]="QueryParms.FormMode === 'A'" (click)="GetPopupConfirmation()">Delete</button>
       </div>
     </form>
   </div>

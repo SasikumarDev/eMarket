@@ -15,6 +15,7 @@ export class CategoryComponent implements OnInit {
   Category: Category = <Category>{};
   QueryParms: ListingRouteParams = <ListingRouteParams>{};
   AllowedFileTypes: Array<string> = ['jpg'];
+  ImageUrl: string = '';
   ProductImage!: File;
   existsValidatorParams: Array<string> = [];
   constructor(private Service: SupabaseService, private app: AppComponent, private Route: Router, private ActiveRoute: ActivatedRoute) { }
@@ -26,13 +27,20 @@ export class CategoryComponent implements OnInit {
       if (Object.keys(this.QueryParms).length === 0) {
         this.Route.navigateByUrl('/');
       } else if (this.QueryParms.FormMode === 'E' && this.QueryParms.Keys) {
+        this.Service.Show();
         this.GetEditData();
-      } else if(this.QueryParms.FormMode === '') {
+      } else if (this.QueryParms.FormMode === '') {
         this.Route.navigateByUrl('/');
       }
     });
   }
-
+  HandleSubmitClck() {
+    if (this.QueryParms.FormMode === 'A') {
+      this.SaveCategory();
+    } else {
+      this.UpdateCategory();
+    }
+  }
   async SaveCategory(): Promise<void> {
     try {
       let CategoryPost = await this.Service.InsertData('Category', this.Category);
@@ -44,8 +52,21 @@ export class CategoryComponent implements OnInit {
           let PrdUpdate = await this.Service.UpdateTable('Category', { CImgpath: FileName }, { CID: savedPrd[0].CID });
           if (!PrdUpdate.error) {
             this.app.ToastMsg.add({ severity: 'success', summary: 'success', detail: 'Saved successfully ..' });
+            this.HandleBack();
           }
         }
+      }
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  async UpdateCategory(): Promise<void> {
+    try {
+      let PrdUpdate = await this.Service.UpdateTable('Category', this.Category, { CID: this.Category.CID });
+      if (!PrdUpdate.error) {
+        this.app.ToastMsg.add({ severity: 'success', summary: 'success', detail: 'Updated successfully ..' });
+        this.HandleBack();
       }
     } catch (ex) {
       console.log(ex);
@@ -74,15 +95,41 @@ export class CategoryComponent implements OnInit {
         if (this.Category.CImgpath) {
           let imgurl = this.Service.GetImageURL(this.Category.CImgpath);
           if (!imgurl.error && imgurl.publicURL) {
-            this.Category.CImgpath = imgurl.publicURL;
+            this.ImageUrl = imgurl.publicURL;
           }
         }
       } else {
 
       }
+      this.Service.Hide();
     } catch (ex) {
+      this.Service.Hide();
       console.log(ex);
     }
   }
 
+  GetPopupConfirmation() {
+    this.app.ConfirmPopup.confirm({
+      message: 'Are you sure that you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+      this.handleDelete();
+      },
+      reject: () => {
+      }
+    });
+  }
+
+  async handleDelete(): Promise<void> {
+    try{
+      let delete_rslt = await this.Service.DeleteData('Category',{CID: this.Category.CID});
+      if(!delete_rslt.error){
+        this.app.ToastMsg.add({ severity: 'success', summary: 'success', detail: 'Deleted successfully ..' });
+        this.HandleBack();
+      }
+    } catch(ex){
+
+    }
+  }
 }

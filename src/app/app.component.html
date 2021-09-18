@@ -57,7 +57,8 @@
 <div class="LoaderContainer" *ngIf="Service.isLoading | async">
   <p-progressSpinner [style]="{top: '50%', left: '50%'}"></p-progressSpinner>
 </div>
-<p-toast></p-toast>
+<p-toast [breakpoints]="{'425px': {width: '100%', right: '0', left: '0'}}" ></p-toast>
+<p-confirmDialog [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
 <p-sidebar [(visible)]="DisplaySideNav" [baseZIndex]="10000" [showCloseIcon]="false">
 <div class="SidenaveHeaderH">
