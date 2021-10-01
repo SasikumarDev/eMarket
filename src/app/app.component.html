@@ -20,6 +20,7 @@
     <div style="display: flex;flex-direction: row;align-items: center;gap:0.2rem">
       <a class="btn btnNoback" routerLink="/Dashboard">Dashboard</a>
       <a class="btn btnNoback" routerLink="/Listing" [queryParams]="{Menu:'Category',Redirect:'/Category'}">Category</a>
+      <a class="btn btnNoback" routerLink="/Listing" [queryParams]="{Menu:'Product',Redirect:'/Product'}">Product</a>
       <button type="button" class="btn btnNoback">Orders</button>
     </div>
   </div>
@@ -80,6 +81,9 @@
 </div>
 <div style="width:100%">
   <a class="btn btnsidenav" routerLink="/Listing" [queryParams]="{Menu:'Category',Redirect:'/Category'}" (click)="DisplaySideNav = false;">Category</a>
+</div>
+<div style="width:100%">
+  <a class="btn btnsidenav" routerLink="/Listing" [queryParams]="{Menu:'Product',Redirect:'/Product'}" (click)="DisplaySideNav = false;">Product</a>
 </div>
 <div style="width:100%">
   <button type="button" class="btn btnsidenav" (click)="DisplaySideNav = false;">Orders</button>

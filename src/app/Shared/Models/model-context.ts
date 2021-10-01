@@ -24,4 +24,22 @@ export interface ListingColDef {
     field: string;
     header: string;
     dataType: string;
+    subField?: string;
+    cssClass?:string;
+}
+
+export interface UOM {
+UOMUID: string;
+UOMDesc: string;
+}
+
+export interface Product {
+    PrdId: string;
+    PrdName: string;
+    PrdCat: string;
+    PrdPrice: number;
+    PrdStock: boolean;
+    PrdUOM: string;
+    PrdIsCustomisable: boolean;
+    PrdImg: string;
 }

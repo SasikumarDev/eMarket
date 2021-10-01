@@ -1,1 +1,38 @@
-<p>product works!</p>
+<div class="Categorydiv">
+  <div class="flexrow">
+    <form #Categoryfrm="ngForm" class="flexcol formWidth">
+      <div style="align-self: center;width:90%">
+        <app-fileupload [AllowedTypes]="AllowedFileTypes" [imageSrc]="ImageUrl" (OnChangeEvent)="OnFileChange($event)"
+          name="fileupld"></app-fileupload>
+      </div>
+      <div style="align-self: center;width:90%">
+        <span class="p-float-label">
+          <input type="text" name="Productname" id="Productname" pInputText [(ngModel)]="Product.PrdName" #PrdName="ngModel"
+            style="width:100%" autocomplete="off" required minlength="6" maxlength="30" appTrim [TrimEmptySpace]="true">
+          <label for="Productname">Product Name</label>
+        </span>
+      </div>
+      <div style="align-self: center;width:90%">
+      <p-dropdown [options]="drpCategory" [(ngModel)]="Product.PrdCat" name="drpCat" #drpCat="ngModel" placeholder="Select a Category" optionLabel="CDesc" optionValue="CID" optionDisabled="CStatus" [showClear]="true" [required]="true"></p-dropdown>
+      </div>
+      <div style="align-self: center;width:90%;display:flex;flex-direction:row;align-items:center;gap:1rem;flex-wrap:wrap">
+        <span class="p-float-label">
+      <p-inputNumber [(ngModel)]="Product.PrdPrice" name="Price" id="Price" #Price="ngModel" prefix="₹ "  [required]="true" mode="decimal" [minFractionDigits]="2" [maxlength] = "10" [maxFractionDigits]="2"></p-inputNumber>
+<label for="Price">Price</label>
+        </span>
+        /
+         <p-dropdown [options]="drpUom" [(ngModel)]="Product.PrdUOM" name="PrdUOM" #PrdUOM="ngModel" placeholder="Select a UOM" optionLabel="UOMDesc" optionValue="UOMUID"  [showClear]="true" [required]="true"></p-dropdown>
+      </div>
+      <div class="StatusHolder">
+        <div style="padding: 0.5rem;">Stock</div>
+        <p-checkbox [(ngModel)]="Product.PrdStock" name="Stock" [binary]="true" inputId="binary" #cStock="ngModel">
+        </p-checkbox>
+      </div>
+      <div class="btnHolder">
+        <button type="button" class="btn btn-warning" (click)="HandleBack()" >Back</button>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-warning">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>

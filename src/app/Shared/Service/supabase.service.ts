@@ -47,8 +47,9 @@ export class SupabaseService {
   CheckExistence(TableName: string, columnNames: string, Condition: any) {
     return this.supabase.from(TableName).select(columnNames, { count: 'exact', head: true }).match(Condition);
   }
-  UploadProductImage(Filename: string, ProductImage: File) {
-    return this.supabase.storage.from('products').upload(`public/${Filename}`, ProductImage);
+  async UploadProductImage(Filename: string, ProductImage: File) {
+    let result = await this.supabase.storage.from('products').upload(`public/${Filename}`, ProductImage);
+    return result;
   }
   GetImageURL(Filename: string) {
     return this.supabase.storage.from('products').getPublicUrl(`public/${Filename}`);
@@ -67,7 +68,8 @@ export class SupabaseService {
   CheckExistenceEdit(tablename: string, columnNames: string, nqColumn: string, nqValue: string, MatchCondition: any) {
     return this.supabase.from(tablename).select(columnNames, { count: 'exact', head: true }).neq(nqColumn, nqValue).match(MatchCondition);
   }
-  DeleteData(tableName: string,MatchCondition: any) {
+  DeleteData(tableName: string, MatchCondition: any) {
     return this.supabase.from(tableName).delete().match(MatchCondition);
   }
+
 }

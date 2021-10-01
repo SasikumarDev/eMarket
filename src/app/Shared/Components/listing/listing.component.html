@@ -1,11 +1,12 @@
 <div class="ActionControl" *ngIf="QueryParms">
   <button class="btn btn-outline-dark" title="Add" (click)="handleAdd()"><i class="pi pi-plus"></i></button>
-  <button class="btn btn-outline-dark" title="Refresh" (click)="handleRefresh()" ><i class="pi pi-refresh"></i></button>
+  <button class="btn btn-outline-dark" title="Refresh" (click)="handleRefresh()"><i class="pi pi-refresh"></i></button>
   <button class="btn btn-outline-dark" title="Export Data" [disabled]="!DataSource"><i
       class="pi pi-arrow-down"></i></button>
 </div>
 <div class="TableListing">
-  <p-table [columns]="cols" [value]="DataSource" selectionMode="single" dataKey="CID" responsiveLayout="stack" [responsive]="true" styleClass="p-datatable-gridlines" [loading]="Loading">
+  <p-table [columns]="cols" [value]="DataSource" selectionMode="single" dataKey="CID" responsiveLayout="stack"
+    [responsive]="true" styleClass="p-datatable-gridlines" [loading]="Loading">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col.field">
@@ -18,7 +19,12 @@
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr (click)="handleSelect(rowData)">
         <td *ngFor="let col of columns">
-          {{rowData[col.field]}}
+          <div *ngIf="col.subField" class="{{col.cssClass}}">
+             {{rowData[col.field][col.subField]}}
+          </div>
+          <div *ngIf="!col.subField" class="{{col.cssClass}}">
+            {{rowData[col.field]}}
+          </div>
         </td>
       </tr>
     </ng-template>

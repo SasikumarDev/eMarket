@@ -3,6 +3,7 @@ import { Category, ListingRouteParams } from './../../Shared/Models/model-contex
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SupabaseService } from 'src/app/Shared/Service/supabase.service';
+import { newGUID } from 'src/app/Shared/Utils/utils';
 
 
 @Component({
@@ -23,7 +24,6 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.ActiveRoute.queryParams.subscribe((x) => {
       this.QueryParms = x as ListingRouteParams;
-      console.log(this.QueryParms);
       if (Object.keys(this.QueryParms).length === 0) {
         this.Route.navigateByUrl('/');
       } else if (this.QueryParms.FormMode === 'E' && this.QueryParms.Keys) {
@@ -43,17 +43,16 @@ export class CategoryComponent implements OnInit {
   }
   async SaveCategory(): Promise<void> {
     try {
+    this.Category.CImgpath = newGUID()+'.'+this.ProductImage.name.substring(this.ProductImage.name.indexOf('.') + 1);
+    console.log(this.Category.CImgpath);
       let CategoryPost = await this.Service.InsertData('Category', this.Category);
       if (!CategoryPost.error && this.ProductImage) {
         let savedPrd = CategoryPost.data as Category[];
-        let FileName = savedPrd[0].CID + '.' + this.ProductImage.name.substring(this.ProductImage.name.indexOf('.') + 1);
+        let FileName = this.Category.CImgpath;
         let FileUploadResult = await this.Service.UploadProductImage(FileName, this.ProductImage);
         if (!FileUploadResult.error) {
-          let PrdUpdate = await this.Service.UpdateTable('Category', { CImgpath: FileName }, { CID: savedPrd[0].CID });
-          if (!PrdUpdate.error) {
-            this.app.ToastMsg.add({ severity: 'success', summary: 'success', detail: 'Saved successfully ..' });
+           this.app.ToastMsg.add({ severity: 'success', summary: 'success', detail: 'Saved successfully ..' });
             this.HandleBack();
-          }
         }
       }
     } catch (ex) {

@@ -31,6 +31,9 @@ import { CheckExistenceDirective } from './Shared/Validators/check-existence.dir
 import { ListingComponent } from './Shared/Components/listing/listing.component';
 import { FileuploadComponent } from './Shared/Components/fileupload/fileupload.component';
 import { TableModule } from 'primeng/table';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputNumberModule} from 'primeng/inputnumber';
+
 
 @NgModule({
   declarations: [
@@ -64,6 +67,8 @@ import { TableModule } from 'primeng/table';
     CheckboxModule,
     ToastModule,
     TableModule,
+    DropdownModule,
+    InputNumberModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
