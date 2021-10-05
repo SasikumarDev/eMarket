@@ -34,17 +34,28 @@ export class ListingComponent implements OnInit {
     this.QueryParms = { Keys: '', FormMode: 'A', Redirect: this.Route.url, Menu: this.QueryParms.Menu };
     if (this.QueryParms.Menu === 'Category') {
       let ds = await this.Service.SelectData('Category');
+      if(ds.data){
+       ds.data.map((data: any) => {
+          data.CStatus = data.CStatus === true?'Active':'In-Active';
+          return data;
+        });
+        }
       this.DataSource = ds.data;
-      this.cols = [{ field: 'CID', header: 'ID', dataType: 'text' }, { field: 'CDesc', header: 'Description', dataType: 'text' }, { field: 'CStatus', header: 'Status', dataType: 'boolean' }];
+      this.cols = [{ field: 'CDesc', header: 'Description', dataType: 'text' }, { field: 'CStatus', header: 'Status', dataType: 'text' }];
     } else if (this.QueryParms.Menu === 'Product') {
       let ds = await this.Service.SelectData('Product', 'PrdId,PrdName,PrdPrice,PrdStock,PrdIsCustomisable,UOM:PrdUOM(UOMDesc),Category:PrdCat(CDesc)');
-      console.log(ds);
+      if(ds.data){
+           ds.data.map((data: any) => {
+          data.PrdStock = data.PrdStock === true?'Available':'Out of Stock';
+          return data;
+        });
+        }
       this.DataSource = ds.data;
       this.cols = [{ field: 'PrdName', header: 'Name', dataType: 'text' },
       { field: 'Category', header: 'Category', dataType: 'text',subField:'CDesc' },
       { field: 'UOM', header: 'UOM', dataType: 'text',subField:'UOMDesc' },
       { field: 'PrdPrice', header: 'Price', dataType: 'number' },
-      { field: 'PrdStock', header: 'Stock', dataType: 'boolean' }];
+      { field: 'PrdStock', header: 'Stock', dataType: 'text' }];
     }
     this.Loading = false;
   }
@@ -66,7 +77,7 @@ export class ListingComponent implements OnInit {
     if (this.QueryParms.Menu === 'Category') {
       this.Route.navigate(['/Category'], { queryParams: { Keys: data?.CID, FormMode: 'E', Redirect: this.Route.url, Menu: this.QueryParms.Menu } });
     } else if(this.QueryParms.Menu === 'Product') {
-      this.Route.navigate(['/Product'], { queryParams: { Keys: data?.CID, FormMode: 'E', Redirect: this.Route.url, Menu: this.QueryParms.Menu } });
+      this.Route.navigate(['/Product'], { queryParams: { Keys: data?.PrdId, FormMode: 'E', Redirect: this.Route.url, Menu: this.QueryParms.Menu } });
     }
   }
   

@@ -38,39 +38,53 @@ primeng/resources/themes/luna-blue/theme.css
 primeng/resources/themes/luna-green/theme.css
 primeng/resources/themes/luna-pink/theme.css
 primeng/resources/themes/rhea/theme.css
- */	
- 
-body {
-    background-color: #f1f3f6;
-}
+ */
 
-.btnLogin {
-    background-color: #fb641b !important;
-    border: 1px solid #fb641b !important;
-}
- 
+ body {
+   background-color: #f1f3f6;
+ }
+
+ .btnLogin {
+   background-color: #fb641b !important;
+   border: 1px solid #fb641b !important;
+ }
+
  .Showxs {
- display:none;
+   display: none;
  }
+
  .Showsm {
-  display:none;
+   display: none;
  }
-@media (max-width:320px)  { 
-.Hidexs {
- display: none !important;
-}
-.Showxs {
-display:block;
-}
-}
-@media (max-width:641px)  {
-.Hidesm{
- display: none !important;
-}
-.Showsm {
-display:block;
-}
-}
-@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
-@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
-@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+
+ @media (max-width:320px) {
+   .Hidexs {
+     display: none !important;
+   }
+
+   .Showxs {
+     display: block;
+   }
+ }
+
+ @media (max-width:641px) {
+   .Hidesm {
+     display: none !important;
+   }
+
+   .Showsm {
+     display: block;
+   }
+ }
+
+ @media (min-width:961px) {
+   /* tablet, landscape iPad, lo-res laptops ands desktops */
+ }
+
+ @media (min-width:1025px) {
+   /* big landscape tablets, laptops, and desktops */
+ }
+
+ @media (min-width:1281px) {
+   /* hi-res laptops and desktops */
+ }

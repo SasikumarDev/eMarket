@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SupabaseService } from 'src/app/Shared/Service/supabase.service';
 import { newGUID } from 'src/app/Shared/Utils/utils';
+import { Form, NgForm } from '@angular/forms';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class CategoryComponent implements OnInit {
   AllowedFileTypes: Array<string> = ['jpg'];
   ImageUrl: string = '';
   ProductImage!: File;
+  ImageSelected: boolean = true;
   existsValidatorParams: Array<string> = [];
   constructor(private Service: SupabaseService, private app: AppComponent, private Route: Router, private ActiveRoute: ActivatedRoute) { }
 
@@ -36,23 +38,25 @@ export class CategoryComponent implements OnInit {
   }
   HandleSubmitClck() {
     if (this.QueryParms.FormMode === 'A') {
-      this.SaveCategory();
+      if (!this.ProductImage) {
+        this.ImageSelected = false;
+      } else {
+        this.ImageSelected = true;
+        this.SaveCategory();
+      }
     } else {
       this.UpdateCategory();
     }
   }
   async SaveCategory(): Promise<void> {
     try {
-    this.Category.CImgpath = newGUID()+'.'+this.ProductImage.name.substring(this.ProductImage.name.indexOf('.') + 1);
-    console.log(this.Category.CImgpath);
+      this.Category.CImgpath = 'C' + newGUID() + '.' + this.ProductImage.name.substring(this.ProductImage.name.indexOf('.') + 1);
       let CategoryPost = await this.Service.InsertData('Category', this.Category);
       if (!CategoryPost.error && this.ProductImage) {
-        let savedPrd = CategoryPost.data as Category[];
-        let FileName = this.Category.CImgpath;
-        let FileUploadResult = await this.Service.UploadProductImage(FileName, this.ProductImage);
+        let FileUploadResult = await this.Service.UploadProductImage(this.Category.CImgpath, this.ProductImage);
         if (!FileUploadResult.error) {
-           this.app.ToastMsg.add({ severity: 'success', summary: 'success', detail: 'Saved successfully ..' });
-            this.HandleBack();
+          this.app.ToastMsg.add({ severity: 'success', summary: 'success', detail: 'Saved successfully ..' });
+          this.HandleBack();
         }
       }
     } catch (ex) {
@@ -97,8 +101,6 @@ export class CategoryComponent implements OnInit {
             this.ImageUrl = imgurl.publicURL;
           }
         }
-      } else {
-
       }
       this.Service.Hide();
     } catch (ex) {
@@ -113,7 +115,7 @@ export class CategoryComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-      this.handleDelete();
+        this.handleDelete();
       },
       reject: () => {
       }
@@ -121,13 +123,13 @@ export class CategoryComponent implements OnInit {
   }
 
   async handleDelete(): Promise<void> {
-    try{
-      let delete_rslt = await this.Service.DeleteData('Category',{CID: this.Category.CID});
-      if(!delete_rslt.error){
+    try {
+      let delete_rslt = await this.Service.DeleteData('Category', { CID: this.Category.CID });
+      if (!delete_rslt.error) {
         this.app.ToastMsg.add({ severity: 'success', summary: 'success', detail: 'Deleted successfully ..' });
         this.HandleBack();
       }
-    } catch(ex){
+    } catch (ex) {
 
     }
   }

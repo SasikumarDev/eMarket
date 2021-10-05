@@ -10,7 +10,7 @@ export interface Category {
     CID: string;
     CDesc: string;
     CImgpath: string;
-    CStatus: string;
+    CStatus: boolean;
 }
 
 export interface ListingRouteParams {

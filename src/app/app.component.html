@@ -4,10 +4,10 @@
       <button type="button" class="btn btnNoback" (click)="DisplaySideNav = true"><i class="pi pi-bars"
           style="font-size: 1rem"></i></button>
     </div>
-    <div>
+    <div style="cursor:pointer" routerLink="/">
       <img src="{{appIcon}}" alt="App icon" style="height: 40px;width: 40px;" />
     </div>
-    <div class="MenuCompanynameHolder Hidexs Hidesm">
+    <div class="MenuCompanynameHolder Hidexs Hidesm" style="cursor:pointer" routerLink="/">
       <div style="font-size: 18px;font-weight:bold">
         {{appName}}
       </div>
@@ -123,4 +123,5 @@
     </form>
   </div>
 </p-dialog>
+<app-shop *ngIf="!UserRole.includes('A') && Route.url === '/'"></app-shop>
 <router-outlet></router-outlet>

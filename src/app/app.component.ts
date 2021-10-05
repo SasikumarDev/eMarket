@@ -30,7 +30,7 @@ export class AppComponent {
   ErrorMessage = '';
   UserRole: string = '';
 
-  constructor(public Service: SupabaseService, private Route: Router, private swupdate: SwUpdate,public ToastMsg: MessageService, public ConfirmPopup: ConfirmationService) {
+  constructor(public Service: SupabaseService, public Route: Router, private swupdate: SwUpdate,public ToastMsg: MessageService, public ConfirmPopup: ConfirmationService) {
     this.swupdate.available.subscribe(event => {
       this.swupdate.activateUpdate().then(() => document.location.reload());
     });

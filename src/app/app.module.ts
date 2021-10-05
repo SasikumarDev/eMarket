@@ -31,8 +31,11 @@ import { CheckExistenceDirective } from './Shared/Validators/check-existence.dir
 import { ListingComponent } from './Shared/Components/listing/listing.component';
 import { FileuploadComponent } from './Shared/Components/fileupload/fileupload.component';
 import { TableModule } from 'primeng/table';
-import {DropdownModule} from 'primeng/dropdown';
-import {InputNumberModule} from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { PaginatorModule } from 'primeng/paginator';
+import { ShopComponent } from './shop/shop.component';
+import { DataViewModule } from 'primeng/dataview';
 
 
 @NgModule({
@@ -46,7 +49,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
     TrimDirective,
     CheckExistenceDirective,
     ListingComponent,
-    FileuploadComponent
+    FileuploadComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +73,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
     TableModule,
     DropdownModule,
     InputNumberModule,
+    PaginatorModule,
+    DataViewModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'

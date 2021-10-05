@@ -10,18 +10,24 @@ export class CheckExistenceDirective implements Validator {
   Result: number | null = 0;
   @Input("FormMode") FormMode: string = 'A';
   @Input("NqField") NqField: Array<string> = [];
+  @Input("TableName") TableName: string = '';
+  @Input("CName") CName: string = '';
+  @Input("MatchProp") MatchProp: string = '';
+  ValueParms: any = {};
   constructor(private Service: SupabaseService) { }
 
   async validate(control: AbstractControl): Promise<ValidationErrors | null> {
+    this.ValueParms[this.MatchProp] = control.value.trim();
     if (this.FormMode === 'A') {
-      this.Result = await (await this.Service.CheckExistence('Category', 'CID', { CDesc: control.value.trim() })).count;
+      this.Result = await (await this.Service.CheckExistence(this.TableName, this.CName, this.ValueParms)).count;
       if (!this.Result) {
         return null;
       } else {
         return { appCheckExistence: true };
       }
     } else if (this.FormMode === 'E' && this.NqField) {
-      this.Result = await (await this.Service.CheckExistenceEdit('Category', 'CID', this.NqField[0], this.NqField[1], { CDesc: control.value.trim() })).count;
+      this.Result = await (await this.Service.CheckExistenceEdit(this.TableName, this.CName, this.NqField[0],
+        this.NqField[1], this.ValueParms)).count;
       if (!this.Result) {
         return null;
       } else {
