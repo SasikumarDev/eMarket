@@ -1,22 +1,72 @@
-<div class="noData">
+<div class="noData" *ngIf="CartItems.length === 0; else cartdetails">
   <div class="cardnodata">
     <div class="CartHeader" style="background-color: rgb(255, 255, 255);">
       <div class="_3g_HeN">My Cart</div>
-      <div *ngIf="CartItems.length === 0" class="CartEmpty">
-      <div>
-      <img src="/assets/images/emcart.png" style="width:100%" alt="no items in cart" />
-      </div>
-      <div style="text-align: center;align-self:center" *ngIf="!appComponent.isUserAuth">
-      <p style="font-size:0.9rem">Missing Cart items?</p>
-      <p style="font-size:0.7rem">Login to see the items you added previously</p>
-      </div>
-      <div style="text-align: center;align-self:center" *ngIf="appComponent.isUserAuth">
-      <p style="font-size:0.9rem">No Cart items</p>
-      </div>
-      <div *ngIf="!appComponent.isUserAuth">
-       <button class="btn btn-primary btnLogin" (click)="appComponent.LoginDialog()">Login</button>
-      </div>
+      <div class="CartEmpty">
+        <div>
+          <img src="/assets/images/emcart.png" style="width:100%" alt="no items in cart" />
+        </div>
+        <div style="text-align: center;align-self:center" *ngIf="!appComponent.isUserAuth">
+          <p style="font-size:0.9rem">Missing Cart items?</p>
+          <p style="font-size:0.7rem">Login to see the items you added previously</p>
+        </div>
+        <div style="text-align: center;align-self:center" *ngIf="appComponent.isUserAuth">
+          <p style="font-size:0.9rem">No Cart items</p>
+        </div>
+        <div *ngIf="!appComponent.isUserAuth">
+          <button class="btn btn-primary btnLogin" (click)="appComponent.LoginDialog()">Login</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #cartdetails>
+  <div class="divrow">
+    <div class="divItemsC">
+      <div class="divItemsCHeader">
+        <b>My Cart ({{CartItems.length}})</b>
+      </div>
+      <div *ngFor="let item of CartItems" style="width: 100%;">
+        <div class="divItemsCBody">
+          <div class="divItemImg">
+            <img [src]="GetImagePath(item.PrdImg)" class="ProductImg" alt="{{item.PrdName}}" />
+          </div>
+          <div style="padding:0.3rem">
+            <p> {{item.PrdName}} </p>
+            <span>₹ {{getPrice(item.PrdQty,item.PrdPrice)}} </span>
+          </div>
+        </div>
+        <div class="divItemfooter">
+          <div>
+            control
+          </div>
+          <div>
+            <button class="btn bg-white text-dark">Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="divItemsCFooter">
+        <div style="justify-self: flex-end;width:100%">
+          <button class="btn bg-orange-500 text-center text-white">Place Order</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="divPrice">
+    <div class="divPriceHeader">
+    <b>PRICE DETAILS</b>
+    </div>
+    <div class="divPriceBody">
+    <div class="divPriceBodyItem">
+    <div>
+    Price ({{CartItems.length}} items)
+    </div>
+     <div>
+     Price
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</ng-template>

@@ -105,8 +105,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
-  justify-content:space-between;
+  gap: 0.5rem;
+  flex-wrap:wrap;
 }
 
 .PrdPrice {
@@ -114,7 +114,7 @@
   flex-direction: row;
   gap: .5rem;
   align-items: center;
-  font-weight:700;
+  font-weight:500;
 }
 
 .Instock {
@@ -127,4 +127,30 @@ padding:0.4rem;
 background: #ffcdd2;
     color: #c63737;
 padding:0.4rem;
+}
+
+:host::ng-deep .p-inputtext{
+width: 2.5rem;
+font-size: 10px;
+height: 2rem;
+}
+
+:host::ng-deep .p-button.p-button-icon-only {
+    width: 1.5rem;
+    padding: 0.5rem 0;
+    height: 2rem;
+}
+.btnCart {
+background: transparent;
+    padding: 0.3rem 1rem 0.3rem 1rem;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+    background-color: #fb641b !important;
+    border: 1px solid #fb641b !important;
+    color: white;
+    text-align: center;
+}
+.btnCart:disabled {
+cursor: not-allowed;
+opacity: 0.6;
 }

@@ -34,7 +34,7 @@
   </div>
   <div style="display:flex;align-self:center;gap:0.2rem">
     <div *ngIf="!UserRole.includes('A')">
-      <button class="btn btnNoback" (click)="RouteCart();"><i class="pi pi-shopping-cart" pBadge
+      <button class="btn btnNoback" (click)="RouteCart();"><i class="pi pi-shopping-cart" pBadge [value]="CartItems.length.toString()"
           severity="warning"></i></button>
     </div>
     <div style="align-self:center" *ngIf="!isUserAuth">

@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { SupabaseService } from './Shared/Service/supabase.service';
-import { Login } from './Shared/Models/model-context';
+import { CartItems, Login } from './Shared/Models/model-context';
 import { Component, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '@supabase/supabase-js';
@@ -29,6 +29,7 @@ export class AppComponent {
   DisplaySideNav: boolean = false;
   ErrorMessage = '';
   UserRole: string = '';
+  CartItems: Array<CartItems> = [];
 
   constructor(public Service: SupabaseService, public Route: Router, private swupdate: SwUpdate,public ToastMsg: MessageService, public ConfirmPopup: ConfirmationService) {
     this.swupdate.available.subscribe(event => {

@@ -2,30 +2,39 @@
   <ng-template let-product pTemplate="listItem">
     <div class="Card">
       <div class="Card-Header">
-        <div>
-           <i class="pi pi-tag product-category-icon"></i>
-           <span class="product-category"> {{product.Category.CDesc}}</span>
+        <div style="white-space:nowrap" >
+          <i class="pi pi-tag product-category-icon"></i>
+          <span class="product-category"> {{product.Category.CDesc}}</span>
         </div>
-        <div>
-        <span [ngClass]="{'Instock': product.PrdStock, 'NoStock': !product.PrdStock}" > {{product.PrdStock?'In Stock':'Out of Stock'}} </span>
+        <div style="white-space:nowrap">
+          <span [ngClass]="{'Instock': product.PrdStock, 'NoStock': !product.PrdStock}">
+            {{product.PrdStock?'In Stock':'Out of Stock'}} </span>
         </div>
       </div>
       <div class="Card-Body">
         <div style="height:15rem;">
           <img [src]="GetImagePath(product.PrdImg)" class="ProductImg" alt="{{product.PrdName}}" />
         </div>
-        <div style="font-weight:700;" >
+        <div style="font-weight:700;">
           {{product.PrdName}}
         </div>
       </div>
       <div class="Card-Footer">
         <div class="PrdPrice">
           <span>₹</span>
-          <span>{{product.PrdPrice}}</span>
-          <span>/ {{product.UOM.UOMDesc}}</span>
+          <span>{{product.PrdPrice}}/{{product.UOM.UOMDesc}}</span>
         </div>
         <div>
-          <p-button icon="pi pi-shopping-cart" [disabled]="product.PrdStock === false"></p-button>
+          <p-inputNumber [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" #PriceQty
+            spinnerMode="horizontal" [step]="1" decrementButtonClass="p-button-danger" [minFractionDigits]="0"
+            [min]="1" 
+            incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+          </p-inputNumber>
+        </div>
+        <div>
+         <button type="button"  [disabled]="product.PrdStock === false" (click)="AddCart(product,PriceQty.value)" class="btnCart">
+        <i class="pi pi-shopping-cart"></i>
+        </button>
         </div>
       </div>
     </div>

@@ -43,3 +43,12 @@ export interface Product {
     PrdIsCustomisable: boolean;
     PrdImg: string;
 }
+
+export interface CartItems {
+    PrdId: string;
+    PrdName: string;
+    PrdPrice: number;
+    PrdUOM: string;
+    PrdImg: string;
+    PrdQty: number;
+}

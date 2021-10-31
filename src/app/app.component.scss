@@ -99,3 +99,12 @@ width: 100%;
 .btnsidenav:hover {
 background-color: #E0E0E0;
 }
+
+:host::ng-deep .p-badge {
+font-size: 0.7rem;
+font-weight: 700;
+min-width: 0.9rem;
+height: 0.9rem;
+line-height: 0.9rem;
+color:white;
+}
